@@ -1,13 +1,16 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../assets/loadNavbar.js"></script>
+    <div id="navbar"></div>
 </head>
 <body>
-    <table>
-        <thead>
+    <br>
+    <table class="table table-striped container">
+        <thead >
             <tr>
                 <th>Nombre</th>
                 <th>Apellidos</th>
@@ -49,9 +52,13 @@
                 const acciones = document.createElement('td')
                 const editar = document.createElement('a')
                 editar.textContent = 'Editar'
+                editar.href = './create.html?id='+user._id
+                editar.classList.add('btn', 'btn-warning')
 
                 const eliminar = document.createElement('button')// Creamos la etiqueta button
                 eliminar.textContent = 'Eliminar'// Agregamos el texto al boton
+                eliminar.classList.add('btn', 'btn-danger')
+
                 eliminar.addEventListener('click', function(){ // Creamos un evento al dar click
                     const textoConfirmacion = 'Esta seguro que decea eliminar a ' + user.nombre + ' ?'
                     if(confirm(textoConfirmacion)){// Mostramos un mensaje de confirmacion
@@ -59,8 +66,8 @@
                     }
                 })
 
-                acciones.appendChild(editar)
                 acciones.appendChild(eliminar)
+                acciones.appendChild(editar)
                 row.appendChild(acciones)
 
 
@@ -77,7 +84,7 @@
         //http://localhost:3000/usuario/65465df654fda45dff
         const deleteUrl = 'http://localhost:3000/usuario/'+id
         //Ejecuto la accion del API 
-        fetch(deleteUrl, {
+        fetch(deleteUrl, { 
             method: 'DELETE' // Defino el metodo a utilizar
         })
         .then(response => {
